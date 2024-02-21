@@ -1,0 +1,63 @@
+$c0: #e20043;
+$c1: #d62900;
+$c2: #f07722;
+$c3: #ff9b55;
+$c4: #fff;
+$c5: #d262a6;
+$c6: #b75591;
+$c7: #a50062;
+
+$r1: #050507;
+$r2: #c72547;
+$r3: #e9509d;
+$r4: #f9bcbe;
+
+body {
+  background-color: $r1;
+  color: $r4;
+  font-family: 'Josefin Slab', serif;
+  font-weight: 500;
+  margin: 2em 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-size: 3em;
+  padding: 0.2em;
+  margin: 0;
+}
+
+img {
+  width: 700px;
+}
+
+@media (min-width: 0px) and (orientation: portrait) {
+  img {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 0px) and (orientation: landscape) {
+  img {
+    max-width: 40%;
+  }
+}
+
+@media (min-width: 680px) {
+  img {
+    max-width: 100%;
+  }
+}

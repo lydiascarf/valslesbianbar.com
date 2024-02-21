@@ -1,0 +1,49 @@
+body {
+  background-color: #050507;
+  color: #f9bcbe;
+  font-family: "Josefin Slab", serif;
+  font-weight: 500;
+  margin: 2em 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-size: 3em;
+  padding: 0.2em;
+  margin: 0;
+}
+
+img {
+  width: 700px;
+}
+
+@media (min-width: 0px) and (orientation: portrait) {
+  img {
+    max-width: 90%;
+  }
+}
+@media (min-width: 0px) and (orientation: landscape) {
+  img {
+    max-width: 40%;
+  }
+}
+@media (min-width: 680px) {
+  img {
+    max-width: 100%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
