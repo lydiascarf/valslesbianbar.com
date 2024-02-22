@@ -1,33 +1,27 @@
+html,
 body {
-  background-color: #050507 !important;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #050507;
   color: #f9bcbe;
   font-family: "Josefin Slab", serif;
   font-weight: 500;
-  margin: 2em 0;
 }
 
-.column {
+.centered {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 p {
   font-size: 3em;
   padding: 0.2em;
-  margin: 0;
-}
-
-img {
-  width: 700px;
+  margin: 1em 0 0 0;
 }
 
 @media (min-width: 0px) and (orientation: portrait) {
@@ -36,13 +30,19 @@ img {
   }
 }
 @media (min-width: 0px) and (orientation: landscape) {
+  a {
+    max-height: 60%;
+  }
   img {
-    max-width: 40%;
+    max-height: 90%;
+  }
+  p {
+    margin: 0;
   }
 }
 @media (min-width: 680px) {
   img {
-    max-width: 100%;
+    max-width: 70%;
   }
 }
 

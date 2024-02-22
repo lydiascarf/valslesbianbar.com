@@ -12,52 +12,55 @@ $r2: #c72547;
 $r3: #e9509d;
 $r4: #f9bcbe;
 
+html,
 body {
-  background-color: $r1 !important;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: $r1;
   color: $r4;
   font-family: 'Josefin Slab', serif;
   font-weight: 500;
-  margin: 2em 0;
 }
 
-.column {
+.centered {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 p {
   font-size: 3em;
   padding: 0.2em;
-  margin: 0;
+  margin: 1em 0 0 0;
 }
 
-img {
-  width: 700px;
-}
-
+// mobile portrait
 @media (min-width: 0px) and (orientation: portrait) {
   img {
     max-width: 90%;
   }
 }
 
+// mobile landscape
 @media (min-width: 0px) and (orientation: landscape) {
+  a {
+    max-height: 60%;
+  }
   img {
-    max-width: 40%;
+    max-height: 90%;
+  }
+  p {
+    margin: 0;
   }
 }
 
+// desktop
 @media (min-width: 680px) {
   img {
-    max-width: 100%;
+    max-width: 70%;
   }
 }
