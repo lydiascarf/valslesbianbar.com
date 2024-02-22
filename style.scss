@@ -13,7 +13,7 @@ $r3: #e9509d;
 $r4: #f9bcbe;
 
 body {
-  background-color: $r1;
+  background-color: $r1 !important;
   color: $r4;
   font-family: 'Josefin Slab', serif;
   font-weight: 500;
