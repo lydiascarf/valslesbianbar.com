@@ -77,3 +77,283 @@ p {
     max-width: 70%;
   }
 }
+
+/* Calendar Page Styles */
+.calendar-page {
+  min-height: 100%;
+  padding: 2em 1em;
+}
+
+.calendar-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.calendar-container h1 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 1em;
+  color: #e9509d;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2em;
+  font-size: 1.2em;
+}
+
+.error {
+  color: #c72547;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.event-item {
+  border: 2px solid #e9509d;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.event-header {
+  background-color: #050507;
+  border: none;
+  color: #f9bcbe;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  width: 100%;
+  font-family: 'Josefin Slab', serif;
+  font-size: 1.1em;
+  text-align: left;
+  gap: 1em;
+}
+
+.event-header:hover {
+  background-color: #1a0a14;
+}
+
+.event-title {
+  flex: 1;
+  font-weight: 600;
+}
+
+.event-datetime {
+  color: #e9509d;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+.event-toggle {
+  background-color: #e9509d;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  height: 28px;
+  width: 28px;
+  min-width: 28px;
+}
+
+.event-description {
+  background-color: #0d0709;
+  border-top: 1px solid #e9509d;
+}
+
+.event-description p {
+  font-size: 1em;
+  padding: 1em 1.5em;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Accordion transitions */
+.collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.expanded {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.transition {
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.back-link {
+  color: #e9509d;
+  display: block;
+  margin-top: 2em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+.back-link:hover {
+  color: #f9bcbe;
+  text-decoration: underline;
+}
+
+@media (min-width: 0px) and (orientation: portrait) {
+  .calendar-container h1 {
+    font-size: 1.8em;
+  }
+  
+  .event-header {
+    flex-wrap: wrap;
+  }
+  
+  .event-title {
+    width: 100%;
+  }
+  
+  .event-datetime {
+    font-size: 0.85em;
+  }
+}
+
+/* Location Page Styles */
+.location-page {
+  min-height: 100%;
+  padding: 2em 1em;
+}
+
+.location-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.location-container h1 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: #e9509d;
+}
+
+.address {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.address p {
+  font-size: 1.2em;
+  margin: 0.2em 0;
+  padding: 0;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  border: 2px solid #e9509d;
+}
+
+@media (min-width: 0px) and (orientation: portrait) {
+  .location-container h1 {
+    font-size: 1.8em;
+  }
+  
+  #map {
+    height: 300px;
+  }
+}
+
+/* Radial Menu Styles */
+.logo-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+}
+
+.logo-link {
+  cursor: pointer;
+  z-index: 10;
+}
+
+.radial-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.menu-item {
+  position: absolute;
+  background-color: #e9509d;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(233, 80, 157, 0.4);
+  pointer-events: auto;
+  /* Position items in a semi-circle below the logo */
+  /* 3 items at angles: 135deg, 180deg, 225deg (bottom-left, bottom, bottom-right) */
+  transform: translate(-50%, -50%);
+}
+
+.menu-item:nth-child(1) {
+  /* Location icon - bottom left */
+  left: -57px;
+  top: 57px;
+}
+
+.menu-item:nth-child(2) {
+  /* Calendar icon - bottom */
+  left: 0;
+  top: 80px;
+}
+
+.menu-item:nth-child(3) {
+  /* Instagram icon - bottom right */
+  left: 57px;
+  top: 57px;
+}
+
+.menu-item:hover {
+  background-color: #f9bcbe;
+  color: #050507;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Alpine.js transition classes */
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.scale-75 {
+  transform: scale(0.75);
+}
+
+.scale-100 {
+  transform: scale(1);
+}
+

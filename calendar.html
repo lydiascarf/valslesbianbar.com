@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Events - Val's Lesbian Bar</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Upcoming events at Val's Lesbian Bar" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/modern-normalize@v2.0.0/modern-normalize.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="theme-color" content="#e20043">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body class="calendar-page">
+    <div class="calendar-container">
+      <h1>Upcoming Events</h1>
+      
+      <div 
+        x-data="{ 
+          events: [
+          { title: 'Opening Night!', datetime: '2026-03-18T17:00:00', description: `Join us for opening night :)` },
+            { title: 'Tush Push Queer Line Dancing', datetime: '2026-04-04T19:00:00', description: 'Placeholder description' },
+          ].sort((a, b) => new Date(a.datetime) - new Date(b.datetime)),
+          openEvent: null
+        }"
+      >
+        <div class="events-list">
+          <template x-for="(event, index) in events" :key="index">
+            <div class="event-item">
+              <button 
+                class="event-header"
+                @click="openEvent = openEvent === index ? null : index"
+                :aria-expanded="openEvent === index"
+              >
+                <div class="event-title" x-text="event.title"></div>
+                <div class="event-datetime" x-text="new Date(event.datetime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })"></div>
+                <span class="event-toggle" x-text="openEvent === index ? '−' : '+'"></span>
+              </button>
+              <div 
+                class="event-description"
+                x-show="openEvent === index"
+                x-transition:enter="transition"
+                x-transition:enter-start="collapsed"
+                x-transition:enter-end="expanded"
+                x-transition:leave="transition"
+                x-transition:leave-start="expanded"
+                x-transition:leave-end="collapsed"
+              >
+                <p x-text="event.description"></p>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+      
+      <a href="index.html" class="back-link">← Back to home</a>
+    </div>
+  </body>
+</html>

@@ -18,10 +18,50 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
   <body class="centered">
-    <a class="centered" target="_blank" href="https://www.instagram.com/valslesbianbar">
-      <img alt="Val's Lesbian Bar" src="./assets/vals.png">
-    </a>
-    <p>coming soon</p>
+    <div 
+      class="logo-container"
+      x-data="{ showMenu: false }"
+      @mouseenter="showMenu = true"
+      @mouseleave="showMenu = false"
+      @click="showMenu = !showMenu"
+    >
+      <div class="centered logo-link" href="#">
+        <img alt="Val's Lesbian Bar" src="./assets/vals.png">
+      </div>
+      
+      <div 
+        class="radial-menu"
+        x-show="showMenu"
+        x-transition:enter="transition"
+        x-transition:enter-start="opacity-0 scale-75"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-75"
+      >
+        <a href="location.html" class="menu-item" title="Location">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </a>
+        <a href="calendar.html" class="menu-item" title="Events">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+            <line x1="16" x2="16" y1="2" y2="6"/>
+            <line x1="8" x2="8" y1="2" y2="6"/>
+            <line x1="3" x2="21" y1="10" y2="10"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/valslesbianbar" target="_blank" class="menu-item" title="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+          </svg>
+        </a>
+      </div>
+    </div>
     <form
       action="https://buttondown.com/api/emails/embed-subscribe/valslesbianbar"
       method="post"
