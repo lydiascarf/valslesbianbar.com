@@ -200,24 +200,6 @@ p {
   border: 2px solid #e9509d;
 }
 
-/* Accordion transitions */
-.collapsed {
-  max-height: 0;
-  overflow: hidden;
-}
-
-.expanded {
-  max-height: 500px;
-  overflow: hidden;
-}
-
-.transition {
-  transition:
-    max-height 0.3s ease-out,
-    opacity 0.2s ease-out,
-    transform 0.2s ease-out;
-}
-
 .back-link {
   color: #e9509d;
   display: block;
@@ -359,12 +341,46 @@ p {
 }
 
 /* Alpine.js transition classes */
+.transition {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.ease-in {
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.transform {
+  transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
+}
+
 .opacity-0 {
   opacity: 0;
 }
 
 .opacity-100 {
   opacity: 1;
+}
+
+.-translate-y-2 {
+  transform: translateY(-0.5rem);
+}
+
+.translate-y-0 {
+  transform: translateY(0);
 }
 
 .scale-75 {

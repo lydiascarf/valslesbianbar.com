@@ -76,15 +76,16 @@ Never been line dancing? Bar is open all night before - Come grab a drink with u
               <div
                 class="event-description"
                 x-show="openEvent === index"
-                x-transition:enter="transition"
-                x-transition:enter-start="collapsed"
-                x-transition:enter-end="expanded"
-                x-transition:leave="transition"
-                x-transition:leave-start="expanded"
-                x-transition:leave-end="collapsed"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2"
               >
                 <img
                   x-show="event.flyer"
+                  x-transition
                   :src="event.flyer"
                   class="event-flyer"
                   alt="Event flyer"
