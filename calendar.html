@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
   <head>
@@ -6,42 +6,74 @@
     <title>Events - Val's Lesbian Bar</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="Upcoming events at Val's Lesbian Bar" />
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/modern-normalize@v2.0.0/modern-normalize.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@v2.0.0/modern-normalize.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <meta name="theme-color" content="#e20043">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <meta name="theme-color" content="#e20043" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   </head>
   <body class="calendar-page">
     <div class="calendar-container">
       <h1>Upcoming Events</h1>
-      
-      <div 
+
+      <div
         x-data="{ 
           events: [
           { title: 'Opening Night!', datetime: '2026-03-18T17:00:00', description: `Join us for opening night :)` },
-            { title: 'Tush Push Queer Line Dancing', datetime: '2026-04-04T19:00:00', description: 'Placeholder description' },
+            { title: 'Tush Push Queer Line Dancing', datetime: '2026-04-04T19:00:00', description: `
+Boots down, birds up 🦅
+Queer country western dancing at Val's Lesbian Bar - Join us for the first ever Tush Push! Whether you're a seasoned line dancer, or stepping out for the first time, this one's all about building a love of line and partner dancing, and community in the city that never stops pushin'. 
+
+What to expect:
+Line dance + 2-step all night
+
+Beginner friendly lessons at 8:30PM & 9:30PM
+
+Welcoming dance floor for all levels 
+
+2 step lessons from 7-8PM before we open the dance floor! Late night 2-Step from Midnight - Late. 
+
+Never been line dancing? Bar is open all night before - Come grab a drink with us before we opened the dance floor and our Tush Push angels will show you a few moves 🤠`, flyer: 'assets/20260404_flyer.jpeg' },
           ].sort((a, b) => new Date(a.datetime) - new Date(b.datetime)),
-          openEvent: null
+          openEvent: null,
+          parseMarkdown(text) {
+            return marked.parse(text);
+          }
         }"
       >
         <div class="events-list">
           <template x-for="(event, index) in events" :key="index">
             <div class="event-item">
-              <button 
+              <button
                 class="event-header"
                 @click="openEvent = openEvent === index ? null : index"
                 :aria-expanded="openEvent === index"
               >
                 <div class="event-title" x-text="event.title"></div>
-                <div class="event-datetime" x-text="new Date(event.datetime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })"></div>
-                <span class="event-toggle" x-text="openEvent === index ? '−' : '+'"></span>
+                <div
+                  class="event-datetime"
+                  x-text="new Date(event.datetime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })"
+                ></div>
+                <span
+                  class="event-toggle"
+                  x-text="openEvent === index ? '−' : '+'"
+                ></span>
               </button>
-              <div 
+              <div
                 class="event-description"
                 x-show="openEvent === index"
                 x-transition:enter="transition"
@@ -51,13 +83,19 @@
                 x-transition:leave-start="expanded"
                 x-transition:leave-end="collapsed"
               >
-                <p x-text="event.description"></p>
+                <img
+                  x-show="event.flyer"
+                  :src="event.flyer"
+                  class="event-flyer"
+                  alt="Event flyer"
+                />
+                <div x-html="parseMarkdown(event.description)"></div>
               </div>
             </div>
           </template>
         </div>
       </div>
-      
+
       <a href="index.html" class="back-link">← Back to home</a>
     </div>
   </body>
