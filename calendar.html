@@ -28,13 +28,29 @@
   </head>
   <body class="calendar-page">
     <div class="calendar-container">
-      <h1>Upcoming Events</h1>
-
       <div
         x-data="{ 
           events: [
-          { title: 'Opening Night!', datetime: '2026-03-18T16:00:00', description: `Val's Lesbian Bar celebrates its grand opening March 18, with a full cocktail and mocktail menu, food, and gays, gays, gays. Enjoy the new space, it's yours <3`, flyer: 'assets/20260318_flyer.jpeg' },
-            { title: 'Tush Push Queer Line Dancing', datetime: '2026-04-04T19:00:00', description: `
+            {
+              title: `Opening Night!`,
+              datetime: '2026-03-18T16:00:00',
+              description: `Val's Lesbian Bar celebrates its grand opening March 18, with a full cocktail and mocktail menu, food, and gays, gays, gays. Enjoy the new space, it's yours <3`,
+              flyer: 'assets/20260318_flyer.jpeg'
+            },
+            {
+              title: `poetik.selektions @ Val's Upstairs`,
+              datetime: '2026-03-28T21:00:00',
+              description: `
+Saturday night, Upstairs at Val's. Shake ass, get weird, feel good, all night!
+
+@poetik.selektions hittin you with beats you know and love, and some you've never heard before. No cover. 9-1 (unless??)
+              `,
+              flyer: 'assets/20260328_flyer.png'
+            },
+            {
+              title: 'Tush Push Queer Line Dancing',
+              datetime: '2026-04-04T19:00:00',
+              description: `
 Boots down, birds up 🦅
 Queer country western dancing at Val's Lesbian Bar - Join us for the first ever Tush Push! Whether you're a seasoned line dancer, or stepping out for the first time, this one's all about building a love of line and partner dancing, and community in the city that never stops pushin'. 
 
@@ -47,21 +63,30 @@ Welcoming dance floor for all levels
 
 2 step lessons from 7-8PM before we open the dance floor! Late night 2-Step from Midnight - Late. 
 
-Never been line dancing? Bar is open all night before - Come grab a drink with us before we opened the dance floor and our Tush Push angels will show you a few moves 🤠`, flyer: 'assets/20260404_flyer.jpeg' },
+Never been line dancing? Bar is open all night before - Come grab a drink with us before we opened the dance floor and our Tush Push angels will show you a few moves 🤠`,
+              flyer: 'assets/20260404_flyer.jpeg'
+            },
           ].sort((a, b) => new Date(a.datetime) - new Date(b.datetime)),
+          upcomingEvents() {
+            return this.events.filter(event => new Date(event.datetime).toDateString() <= new Date().toDateString());
+          },
+          pastEvents() {
+            return this.events.filter(event => new Date(event.datetime).toDateString() > new Date().toDateString());
+          },
           openEvent: null,
           parseMarkdown(text) {
             return marked.parse(text);
           }
         }"
       >
+        <h1>Upcoming Events</h1>
         <div class="events-list">
-          <template x-for="(event, index) in events" :key="index">
+          <template x-for="(event) in upcomingEvents()" :key="event.flyer">
             <div class="event-item">
               <button
                 class="event-header"
-                @click="openEvent = openEvent === index ? null : index"
-                :aria-expanded="openEvent === index"
+                @click="openEvent = openEvent === event.flyer ? null : event.flyer"
+                :aria-expanded="openEvent === event.flyer"
               >
                 <div class="event-title" x-text="event.title"></div>
                 <div
@@ -70,12 +95,53 @@ Never been line dancing? Bar is open all night before - Come grab a drink with u
                 ></div>
                 <span
                   class="event-toggle"
-                  x-text="openEvent === index ? '−' : '+'"
+                  x-text="openEvent === event.flyer ? '−' : '+'"
                 ></span>
               </button>
               <div
                 class="event-description"
-                x-show="openEvent === index"
+                x-show="openEvent === event.flyer"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform -translate-y-2"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-2"
+              >
+                <img
+                  x-show="event.flyer"
+                  x-transition
+                  :src="event.flyer"
+                  class="event-flyer"
+                  alt="Event flyer"
+                />
+                <div x-html="parseMarkdown(event.description)"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <h1>Past Events</h1>
+        <div class="events-list">
+          <template x-for="(event) in pastEvents()" :key="event.flyer">
+            <div class="event-item">
+              <button
+                class="event-header"
+                @click="openEvent = openEvent === event.flyer ? null : event.flyer"
+                :aria-expanded="openEvent === event.flyer"
+              >
+                <div class="event-title" x-text="event.title"></div>
+                <div
+                  class="event-datetime"
+                  x-text="new Date(event.datetime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })"
+                ></div>
+                <span
+                  class="event-toggle"
+                  x-text="openEvent === event.flyer ? '−' : '+'"
+                ></span>
+              </button>
+              <div
+                class="event-description"
+                x-show="openEvent === event.flyer"
                 x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                 x-transition:enter-end="opacity-100 transform translate-y-0"
