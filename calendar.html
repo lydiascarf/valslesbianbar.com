@@ -29,6 +29,15 @@
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/isSameOrAfter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
+    <script>
+      dayjs.extend(window.dayjs_plugin_isSameOrAfter);
+      dayjs.extend(window.dayjs_plugin_utc);
+      dayjs.extend(window.dayjs_plugin_timezone);
+    </script>
   </head>
   <body class="calendar-page">
     <div class="calendar-container">
@@ -37,13 +46,13 @@
           events: [
             {
               title: `Opening Night!`,
-              datetime: '2026-03-18T16:00:00',
+              datetime: '2026-03-18T16:00:00-04:00',
               description: `Val's Lesbian Bar celebrates its grand opening March 18, with a full cocktail and mocktail menu, food, and gays, gays, gays. Enjoy the new space, it's yours <3`,
               flyer: 'assets/20260318_flyer.jpeg'
             },
             {
               title: `poetik.selektions @ Val's Upstairs`,
-              datetime: '2026-03-28T21:00:00',
+              datetime: '2026-03-28T21:00:00-04:00',
               description: `
 Saturday night, Upstairs at Val's. Shake ass, get weird, feel good, all night!
 
@@ -53,7 +62,7 @@ Saturday night, Upstairs at Val's. Shake ass, get weird, feel good, all night!
             },
             {
               title: 'Tush Push Queer Line Dancing',
-              datetime: '2026-04-04T19:00:00',
+              datetime: '2026-04-04T19:00:00-04:00',
               description: `
 Boots down, birds up 🦅
 Queer country western dancing at Val's Lesbian Bar - Join us for the first ever Tush Push! Whether you're a seasoned line dancer, or stepping out for the first time, this one's all about building a love of line and partner dancing, and community in the city that never stops pushin'. 
@@ -70,12 +79,18 @@ Welcoming dance floor for all levels
 Never been line dancing? Bar is open all night before - Come grab a drink with us before we opened the dance floor and our Tush Push angels will show you a few moves 🤠`,
               flyer: 'assets/20260404_flyer.jpeg'
             },
-          ].sort((a, b) => new Date(a.datetime) - new Date(b.datetime)),
+          ].sort((a, b) => dayjs(a.datetime).tz('America/New_York').valueOf() - dayjs(b.datetime).tz('America/New_York').valueOf()),
+          now() {
+            return dayjs().tz('America/New_York');
+          },
           upcomingEvents() {
-            return this.events.filter(event => new Date(event.datetime).toDateString() <= new Date().toDateString());
+            return this.events.filter(event => dayjs(event.datetime).tz('America/New_York').isSameOrAfter(this.now()));
           },
           pastEvents() {
-            return this.events.filter(event => new Date(event.datetime).toDateString() > new Date().toDateString());
+            return this.events.filter(event => dayjs(event.datetime).tz('America/New_York').isBefore(this.now()));
+          },
+          formatDate(datetime) {
+            return dayjs(datetime).tz('America/New_York').format('ddd, MMM D, h:mm A');
           },
           openEvent: null,
           parseMarkdown(text) {
@@ -95,7 +110,7 @@ Never been line dancing? Bar is open all night before - Come grab a drink with u
                 <div class="event-title" x-text="event.title"></div>
                 <div
                   class="event-datetime"
-                  x-text="new Date(event.datetime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })"
+                  x-text="formatDate(event.datetime)"
                 ></div>
                 <span
                   class="event-toggle"
@@ -136,7 +151,7 @@ Never been line dancing? Bar is open all night before - Come grab a drink with u
                 <div class="event-title" x-text="event.title"></div>
                 <div
                   class="event-datetime"
-                  x-text="new Date(event.datetime).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })"
+                  x-text="formatDate(event.datetime)"
                 ></div>
                 <span
                   class="event-toggle"
