@@ -67,24 +67,29 @@ p {
     left: 50%;
   }
 }
+
 @media (min-width: 0px) and (orientation: landscape) {
   img {
     max-height: 70%;
     max-height: 80%;
   }
+
   p {
     margin: 0;
   }
+
   .radial-menu {
     top: 80%;
     left: 50%;
   }
 }
+
 @media (min-width: 680px) {
   img {
     max-height: 70%;
     max-width: 70%;
   }
+
   .radial-menu {
     top: 80%;
     left: 50%;

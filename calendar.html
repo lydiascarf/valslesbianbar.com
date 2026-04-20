@@ -4,8 +4,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta property="og:title" content="Events @ Val's Lesbian Bar" />
-    <meta property="og:description" content="Upcoming events at Val's Lesbian Bar" />
-    <meta property="og:image" content="https://valslesbianbar.com/assets/vals.png" />
+    <meta
+      property="og:description"
+      content="Upcoming events at Val's Lesbian Bar"
+    />
+    <meta
+      property="og:image"
+      content="https://valslesbianbar.com/assets/vals.png"
+    />
     <meta property="og:url" content="https://valslesbianbar.com/calendar" />
     <title>Events @ Val's</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -33,6 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/isSameOrAfter.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
     <script>
       dayjs.extend(window.dayjs_plugin_isSameOrAfter);
       dayjs.extend(window.dayjs_plugin_utc);
@@ -43,62 +50,65 @@
     <div class="calendar-container">
       <div
         x-data="{ 
-          events: [
-            {
-              title: `Opening Night!`,
-              datetime: '2026-03-18T16:00:00-04:00',
-              description: `Val's Lesbian Bar celebrates its grand opening March 18, with a full cocktail and mocktail menu, food, and gays, gays, gays. Enjoy the new space, it's yours <3`,
-              flyer: 'assets/20260318_flyer.jpeg'
-            },
-            {
-              title: `poetik.selektions @ Val's Upstairs`,
-              datetime: '2026-03-28T21:00:00-04:00',
-              description: `
-Saturday night, Upstairs at Val's. Shake ass, get weird, feel good, all night!
-
-@poetik.selektions hittin you with beats you know and love, and some you've never heard before. No cover. 9-1 (unless??)
-              `,
-              flyer: 'assets/20260328_flyer.png'
-            },
-            {
-              title: 'Tush Push Queer Line Dancing',
-              datetime: '2026-04-04T19:00:00-04:00',
-              description: `
-Boots down, birds up 🦅
-Queer country western dancing at Val's Lesbian Bar - Join us for the first ever Tush Push! Whether you're a seasoned line dancer, or stepping out for the first time, this one's all about building a love of line and partner dancing, and community in the city that never stops pushin'. 
-
-What to expect:
-Line dance + 2-step all night
-
-Beginner friendly lessons at 8:30PM & 9:30PM
-
-Welcoming dance floor for all levels 
-
-2 step lessons from 7-8PM before we open the dance floor! Late night 2-Step from Midnight - Late. 
-
-Never been line dancing? Bar is open all night before - Come grab a drink with us before we opened the dance floor and our Tush Push angels will show you a few moves 🤠`,
-              flyer: 'assets/20260404_flyer.jpeg'
-            },
-          ].sort((a, b) => dayjs(a.datetime).tz('America/New_York').valueOf() - dayjs(b.datetime).tz('America/New_York').valueOf()),
+          events: [],
+          loading: true,
+          error: null,
+          
+          async init() {
+            try {
+              const response = await fetch('events.yaml');
+              if (!response.ok) {
+                throw new Error('Failed to load events');
+              }
+              const yamlText = await response.text();
+              const data = jsyaml.load(yamlText);
+              this.events = (data.events || []).sort((a, b) => 
+                dayjs(a.datetime).tz('America/New_York').valueOf() - 
+                dayjs(b.datetime).tz('America/New_York').valueOf()
+              );
+              this.loading = false;
+            } catch (err) {
+              this.error = err.message;
+              this.loading = false;
+            }
+          },
+          
           now() {
             return dayjs().tz('America/New_York');
           },
+          
           upcomingEvents() {
-            return this.events.filter(event => dayjs(event.datetime).tz('America/New_York').isSameOrAfter(this.now()));
+            return this.events.filter(event => 
+              dayjs(event.datetime).tz('America/New_York').isSameOrAfter(this.now())
+            );
           },
+          
           pastEvents() {
-            return this.events.filter(event => dayjs(event.datetime).tz('America/New_York').isBefore(this.now()));
+            return this.events.filter(event => 
+              dayjs(event.datetime).tz('America/New_York').isBefore(this.now())
+            );
           },
+          
           formatDate(datetime) {
             return dayjs(datetime).tz('America/New_York').format('ddd, MMM D, h:mm A');
           },
+          
           openEvent: null,
+          
           parseMarkdown(text) {
             return marked.parse(text);
           }
         }"
       >
-        <h1>Upcoming Events</h1>
+        <div>
+          <h1>Calendar</h1>
+          <div x-show="loading" class="loading">Loading events...</div>
+          <div x-show="error" class="error" x-text="error"></div>
+          <div x-show="!loading && !error" x-ref="calendar"></div>
+        </div>
+        <template x-if="upcomingEvents().length > 0">
+          <h2>Upcoming</h2>
+        </template>
         <div class="events-list">
           <template x-for="(event) in upcomingEvents()" :key="event.flyer">
             <div class="event-item">
@@ -139,7 +149,9 @@ Never been line dancing? Bar is open all night before - Come grab a drink with u
             </div>
           </template>
         </div>
-        <h1>Past Events</h1>
+        <template x-if="pastEvents().length > 0">
+          <h2>Past</h2>
+        </template>
         <div class="events-list">
           <template x-for="(event) in pastEvents()" :key="event.flyer">
             <div class="event-item">
