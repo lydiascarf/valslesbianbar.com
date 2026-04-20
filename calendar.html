@@ -37,13 +37,15 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/isSameOrAfter.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/timezone.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/weekday.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
     <script>
       dayjs.extend(window.dayjs_plugin_isSameOrAfter);
-      dayjs.extend(window.dayjs_plugin_utc);
       dayjs.extend(window.dayjs_plugin_timezone);
+      dayjs.extend(window.dayjs_plugin_utc);
+      dayjs.extend(window.dayjs_plugin_weekday);
     </script>
   </head>
   <body class="calendar-page">
@@ -62,15 +64,34 @@
               }
               const yamlText = await response.text();
               const data = jsyaml.load(yamlText);
-              this.events = (data.events || []).sort((a, b) => 
+              const eventsWithRepeats = this.handleRepeatingEvents(data.events || []);
+              this.events = (eventsWithRepeats || []).sort((a, b) => 
                 dayjs(a.datetime).tz('America/New_York').valueOf() - 
                 dayjs(b.datetime).tz('America/New_York').valueOf()
               );
               this.loading = false;
             } catch (err) {
-              this.error = err.message;
+              console.error('Error loading events:', err);
+              this.error = 'Something went wrong loading events 😭';
               this.loading = false;
             }
+          },
+
+          handleRepeatingEvents(events) {
+            return events.flatMap(event => {
+              if (event.repeat) {
+                switch (event.repeat.interval) {
+                  case 'weekly':
+                    const candidate = this.now().startOf('day').weekday(event.repeat.weekday).hour(event.repeat.hour).minute(event.repeat.minute);
+                    return {
+                      ...event,
+                      datetime: candidate.isBefore(this.now().startOf('day')) ? candidate.add(1, 'week').toISOString() : candidate.toISOString()
+                    };
+                  default:
+                    console.error('Unsupported repeat interval:', event.repeat.interval);
+                } 
+              } else return event;
+            })
           },
           
           now() {
