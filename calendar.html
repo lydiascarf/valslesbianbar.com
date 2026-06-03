@@ -154,7 +154,7 @@
           <h2>Upcoming</h2>
         </template>
         <div class="events-list">
-          <template x-for="(event) in upcomingEvents()" :key="event.flyer">
+          <template x-for="(event) in upcomingEvents()" :key="event.datetime + event.flyer">
             <div class="event-item">
               <button
                 class="event-header"

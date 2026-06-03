@@ -1,0 +1,29 @@
+name: Generate Repeating Events
+
+on:
+  schedule:
+    # Runs every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - 'content/events/repeating_templates/**'
+
+permissions:
+  contents: write
+  
+jobs:
+  generate-events:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run event generator
+        run: bash scripts/generate-events.sh
+      - name: Commit generated events
+        run: |
+          git config user.name "Event Generator Bot"
+          git config user.email "bot@example.com"
+          git add content/events/repeating_generated/
+          git diff --quiet && git diff --staged --quiet || git commit -m "CHORE: Generate recurring events for next month"
+          git push
