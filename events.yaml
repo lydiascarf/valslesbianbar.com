@@ -2,14 +2,14 @@ events:
   - title: "Opening Night!"
     datetime: "2026-03-18T16:00:00-04:00"
     description: "Val's Lesbian Bar celebrates its grand opening March 18, with a full cocktail and mocktail menu, food, and gays, gays, gays. Enjoy the new space, it's yours <3"
-    flyer: "assets/20260318_flyer.jpeg"
+    flyer: "static/assets/20260318_flyer.jpeg"
   - title: "poetik.selektions @ Val's Upstairs"
     datetime: "2026-03-28T21:00:00-04:00"
     description: |
       Saturday night, Upstairs at Val's. Shake ass, get weird, feel good, all night!
 
       @poetik.selektions hittin you with beats you know and love, and some you've never heard before. No cover. 9-1 (unless??)
-    flyer: "assets/20260328_flyer.png"
+    flyer: "static/assets/20260328_flyer.png"
   - title: "Tush Push Queer Line Dancing"
     datetime: "2026-04-04T19:00:00-04:00"
     description: |
@@ -26,7 +26,7 @@ events:
       2 step lessons from 7-8PM before we open the dance floor! Late night 2-Step from Midnight - Late.
 
       Never been line dancing? Bar is open all night before - Come grab a drink with us before we opened the dance floor and our Tush Push angels will show you a few moves 🤠
-    flyer: "assets/20260404_flyer.jpeg"
+    flyer: "static/assets/20260404_flyer.jpeg"
   - title: "Queer Afro-Latin Dance Night"
     datetime: "2026-04-24T21:00:00-04:00"
     description: |
@@ -39,7 +39,7 @@ events:
       12am-1am HORA DE PERREO (Dembow, Reggaeton, Neo Perreo, Brazilian Funke and more) by @djcassiana
 
       QAL Dance welcomes and celebrates all identities at their Queer Afro-Latin dance events, including the LGBTQIA+ community and allies. We have ZERO tolerance for harassment of any kind! If you ever feel unsafe or uncomfortable at our events, please don't hesitate to approach staff from QAL Dance and/or Val's. Your safety and enjoyment are our priorities!
-    flyer: "assets/20260424_flyer.png"
+    flyer: "static/assets/20260424_flyer.png"
   - title: "Lavender Panzies Not-So-Secret Garden Party, fundraiser for QAMP and We Are the Seeds"
     datetime: "2026-05-01T21:00:00-04:00"
     description: |
@@ -52,7 +52,7 @@ events:
       Feat. DJ iiinfinite + friends
       
       $10-$15 cover
-    flyer: "assets/20260501_flyer.png"
+    flyer: "static/assets/20260501_flyer.png"
   - title: "ThirdSpace"
     datetime: "2026-05-15T21:00:00-04:00"
     description: |
@@ -90,7 +90,7 @@ events:
       
       RSVP link in bio.
       Presented by SYNCSONIC.
-    flyer: "assets/20260515_flyer.png"
+    flyer: "static/assets/20260515_flyer.png"
   - title: Crafty Sundays at Val's
     repeat:
       interval: 'weekly'
@@ -99,7 +99,7 @@ events:
       minute: 0
     description: |
       If YOU look like THIS MOUSE, come to Val's on any given Sunday, bring your craft, enjoy our happy hour 4-6, and meet other crafty queers who make beautiful things! Informal meetup, no RSVP, no cover, all good vibes, every Sunday. 21+ with valid ID (we are still a bar).
-    flyer: "assets/sundays_craft_flyer.jpg"
+    flyer: "static/assets/sundays_craft_flyer.jpg"
   - title: Karaoke at Val's
     repeat:
       interval: 'weekly'
@@ -108,4 +108,4 @@ events:
       minute: 0
     description: |
       Karaoke EVERY THURSDAY, 9-1, Upstairs at Val's. With your ever-illustrious, always-graceful, silky smooth host: Mr. Wish. Every Thursday. Gay every time.
-    flyer: "assets/thursdays_karaoke_flyer.jpg"
+    flyer: "static/assets/thursdays_karaoke_flyer.jpg"

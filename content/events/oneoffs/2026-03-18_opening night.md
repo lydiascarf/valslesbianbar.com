@@ -1,0 +1,8 @@
++++
+title = "Opening Night!"
+datetime = "2026-03-18T16:00:00-04:00"
+flyer = "static/assets/20260318_flyer.jpeg"
+description = """
+  Val's Lesbian Bar celebrates its grand opening March 18, with a full cocktail and mocktail menu, food, and gays, gays, gays. Enjoy the new space, it's yours <3
+"""
++++

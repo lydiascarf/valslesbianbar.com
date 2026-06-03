@@ -1,0 +1,14 @@
++++
+title = "Crafty Sundays at Val's"
+
+[repeat]
+interval = 'weekly'
+weekday = 0
+hour = 16
+minute = 0
+
+description = """
+  If YOU look like THIS MOUSE, come to Val's on any given Sunday, bring your craft, enjoy our happy hour 4-6, and meet other crafty queers who make beautiful things! Informal meetup, no RSVP, no cover, all good vibes, every Sunday. 21+ with valid ID (we are still a bar).
+"""
+flyer = "static/assets/sundays_craft_flyer.jpg"
++++

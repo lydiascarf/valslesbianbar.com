@@ -1,0 +1,41 @@
++++
+title = "ThirdSpace"
+datetime = "2026-05-15T21:00:00-04:00"
+flyer = "static/assets/20260515_flyer.png"
+description = """
+  Third Space comes to Philly May 15: "We're building something that doesn't exist enough
+
+  Not just a party.
+
+  Not just networking.
+
+  A space in between - where Black & Brown Sapphic creatives can meet, build, and be seen!
+
+  Sober Friendly!
+
+  DJs. Producers. Designers. Stylists. Photographers. Videographers. Organizers. Connectors.
+
+  ALL MEDIUMS!
+
+  6-8PM ---> Intentional connection
+
+  Speed networking, creative prompts
+
+  8-9PM ---> Open mingle
+
+  Follow up, exchange
+
+  9PM-late ---> Dance floor release
+  We celebrate. We move. We let it all out together.
+
+
+  This is for the ones tired of "networking" that goes nowhere.
+
+  For the creatives who want community, not just contacts.
+
+  Tap in.
+
+  RSVP link in bio.
+  Presented by SYNCSONIC.
+"""
++++
