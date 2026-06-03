@@ -6,10 +6,14 @@ on:
     branches: ["main"]
     paths:
       - 'content/events/**'
+  workflow_run:
+    branches: ["main"]
+    workflows: ["Generate Repeating Events"]
+    types: [completed]
 
 permissions:
   contents: write
-  
+
 jobs:
   generate-manifest:
     runs-on: ubuntu-latest

@@ -1,18 +1,16 @@
 name: Deploy static content to Pages
 
 on:
-  push:
+  workflow_run:
     branches: ["main"]
+    workflows: ["Generate Manifest File"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   deploy:

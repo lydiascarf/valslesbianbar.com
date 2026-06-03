@@ -38,7 +38,7 @@ collections:
       - {label: "Description", name: "description", widget: "markdown"}
   - label: Repeating Events
     name: repeating_events
-    folder: "content/events/recurring"
+    folder: "content/events/repeating_templates"
     format: yaml
     create: true
     fields:
