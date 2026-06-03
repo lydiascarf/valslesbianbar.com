@@ -58,14 +58,32 @@
           
           async init() {
             try {
-              const response = await fetch('events.yaml');
-              if (!response.ok) {
-                throw new Error('Failed to load events');
+              const oneoffResponse = await fetch('content/events/oneoffs');
+              const repeatingResponse = await fetch('content/events/repeating_generated');
+              if (!oneoffResponse.ok || !repeatingResponse.ok) {
+                throw new Error('Failed to load events directory');
               }
-              const yamlText = await response.text();
-              const data = jsyaml.load(yamlText);
-              const eventsWithRepeats = this.handleRepeatingEvents(data.events || []);
-              this.events = (eventsWithRepeats || []).sort((a, b) => 
+              
+              const oneoffText = await oneoffResponse.text();
+              const repeatingText = await repeatingResponse.text();
+              const oneoffFileNames = this.parseDirectoryListing(oneoffText);
+              const repeatingFileNames = this.parseDirectoryListing(repeatingText);
+              const oneoffYamlFiles = oneoffFileNames.filter(f => f.endsWith('.yaml')).map(f => `content/events/oneoffs/${f}`);
+              const repeatingYamlFiles = repeatingFileNames.filter(f => f.endsWith('.yaml')).map(f => `content/events/repeating_generated/${f}`);
+              const allYamlFiles = oneoffYamlFiles.concat(repeatingYamlFiles);
+
+              let allEvents = [];
+              for (const fileName of allYamlFiles) {
+                const fileResponse = await fetch(fileName);
+                if (!fileResponse.ok) continue;
+                
+                const yamlText = await fileResponse.text();
+                const data = jsyaml.load(yamlText);
+                const events = Array.isArray(data.events) ? data.events : [data];
+                allEvents = allEvents.concat(events);
+              }
+              
+              this.events = (allEvents || []).sort((a, b) => 
                 dayjs(a.datetime).tz('America/New_York').valueOf() - 
                 dayjs(b.datetime).tz('America/New_York').valueOf()
               );
@@ -77,23 +95,22 @@
             }
           },
 
-          handleRepeatingEvents(events) {
-            return events.flatMap(event => {
-              if (event.repeat) {
-                switch (event.repeat.interval) {
-                  case 'weekly':
-                    const candidate = this.now().startOf('day').weekday(event.repeat.weekday).hour(event.repeat.hour).minute(event.repeat.minute);
-                    return {
-                      ...event,
-                      datetime: candidate.isBefore(this.now().startOf('day')) ? candidate.add(1, 'week').toISOString() : candidate.toISOString()
-                    };
-                  default:
-                    console.error('Unsupported repeat interval:', event.repeat.interval);
-                } 
-              } else return event;
-            })
+          parseDirectoryListing(htmlContent) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
+            const links = doc.querySelectorAll('a');
+            const files = [];
+            
+            links.forEach(link => {
+              const href = link.getAttribute('href');
+              if (href && href !== '../' && !href.endsWith('/') && href.endsWith('.yaml')) {
+                files.push(href);
+              }
+            });
+            
+            return files;
           },
-          
+
           now() {
             return dayjs().tz('America/New_York');
           },
@@ -101,12 +118,18 @@
           upcomingEvents() {
             return this.events.filter(event => 
               dayjs(event.datetime).tz('America/New_York').isSameOrAfter(this.now())
+            ).sort((a, b) => 
+              dayjs(a.datetime).tz('America/New_York').valueOf() - 
+              dayjs(b.datetime).tz('America/New_York').valueOf()
             );
           },
           
           pastEvents() {
             return this.events.filter(event => 
               dayjs(event.datetime).tz('America/New_York').isBefore(this.now())
+            ).sort((a, b) => 
+              dayjs(b.datetime).tz('America/New_York').valueOf() - 
+              dayjs(a.datetime).tz('America/New_York').valueOf()
             );
           },
           

@@ -29,15 +29,17 @@ collections:
   - label: One off Events
     name: oneoff_events
     folder: "content/events/oneoffs"
+    format: yaml
     create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "datetime", widget: "datetime"}
+      - {label: "Date and Time", name: "datetime", widget: "datetime"}
       - {label: "Featured Image", name: "flyer", widget: "image", choose_url: false}
       - {label: "Description", name: "description", widget: "markdown"}
   - label: Repeating Events
     name: repeating_events
     folder: "content/events/recurring"
+    format: yaml
     create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
@@ -48,19 +50,8 @@ collections:
         widget: "object"
         fields: 
           - {label: "Interval", name: "interval", widget: "select", options: ['weekly']}
-          - label: "Weekday"
-            name: "weekday"
-            widget: "select"
-            options: 
-              - { label: 'Sunday', value: 0 }
-              - { label: 'Monday', value: 1 }
-              - { label: 'Tuesday', value: 2 }
-              - { label: 'Wednesday', value: 3 }
-              - { label: 'Thursday', value: 4 }
-              - { label: 'Friday', value: 5 }
-              - { label: 'Saturday', value: 6 }
-          - label: "Start time"
-            name: "start"
+          - label: "First Date and Time"
+            name: "datetime"
             widget: "datetime"
             default: "{{now}}"
             date_format: "MM.DD.YYYY"

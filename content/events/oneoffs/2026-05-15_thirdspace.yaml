@@ -1,9 +1,10 @@
-+++
-title = "ThirdSpace"
-datetime = "2026-05-15T21:00:00-04:00"
-flyer = "static/assets/20260515_flyer.png"
-description = """
-  Third Space comes to Philly May 15: "We're building something that doesn't exist enough
+title: "ThirdSpace"
+datetime: "2026-05-15T21:00:00-04:00"
+flyer: "static/assets/20260515_flyer.png"
+description: |
+  Third Space comes to Philly May 15:
+  
+  We're building something that doesn't exist enough
 
   Not just a party.
 
@@ -37,5 +38,3 @@ description = """
 
   RSVP link in bio.
   Presented by SYNCSONIC.
-"""
-+++
