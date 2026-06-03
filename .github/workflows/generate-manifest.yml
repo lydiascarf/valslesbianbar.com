@@ -1,0 +1,30 @@
+name: Generate Manifest File
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - 'content/events/**'
+
+permissions:
+  contents: write
+  
+jobs:
+  generate-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run event generator
+        run: bash scripts/generate-manifest.sh
+      - name: Commit generated manifest
+        run: |
+          git config user.name "Manifest Generator Bot"
+          git config user.email "bot@example.com"
+          git add manifest.json
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "CHORE: Generate new manifest.json"
+            git push
+          fi

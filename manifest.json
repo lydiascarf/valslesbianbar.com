@@ -1,0 +1,82 @@
+[
+  {
+    "name": "2026-03-18_opening night.yaml",
+    "path": "content/events/oneoffs/2026-03-18_opening night.yaml",
+    "type": "oneoff"
+  },
+  {
+    "name": "2026-03-28_poetikselektions.yaml",
+    "path": "content/events/oneoffs/2026-03-28_poetikselektions.yaml",
+    "type": "oneoff"
+  },
+  {
+    "name": "2026-04-04_linedancing.yaml",
+    "path": "content/events/oneoffs/2026-04-04_linedancing.yaml",
+    "type": "oneoff"
+  },
+  {
+    "name": "2026-04-24_latindance.yaml",
+    "path": "content/events/oneoffs/2026-04-24_latindance.yaml",
+    "type": "oneoff"
+  },
+  {
+    "name": "2026-05-01_lavenderpanzies.yaml",
+    "path": "content/events/oneoffs/2026-05-01_lavenderpanzies.yaml",
+    "type": "oneoff"
+  },
+  {
+    "name": "2026-05-15_thirdspace.yaml",
+    "path": "content/events/oneoffs/2026-05-15_thirdspace.yaml",
+    "type": "oneoff"
+  },
+  {
+    "name": "2026-04-12_craftsundays.yaml",
+    "path": "content/events/repeating_generated/2026-04-12_craftsundays.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-04_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-04_karaoke_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-07_crafty_sundays_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-07_crafty_sundays_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-11_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-11_karaoke_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-14_crafty_sundays_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-14_crafty_sundays_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-18_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-18_karaoke_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-21_crafty_sundays_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-21_crafty_sundays_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-25_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-25_karaoke_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-06-28_crafty_sundays_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-06-28_crafty_sundays_at_vals.yaml",
+    "type": "repeating"
+  },
+  {
+    "name": "2026-07-02_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-07-02_karaoke_at_vals.yaml",
+    "type": "repeating"
+  }
+]
