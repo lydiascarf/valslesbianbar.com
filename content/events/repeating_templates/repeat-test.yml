@@ -1,0 +1,6 @@
+title: Repeat test
+flyer: /static/assets/vals.png
+description: hello
+repeat:
+  datetime: 06.04.2026T21:26
+  interval: weekly
