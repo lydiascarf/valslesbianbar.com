@@ -154,5 +154,17 @@
     "path": "content/events/repeating_generated/2026-08-06_karaoke_at_vals.yaml",
     "type": "repeating"
   }
+,
+  {
+    "name": "2026-08-09_crafty_sundays_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-08-09_crafty_sundays_at_vals.yaml",
+    "type": "repeating"
+  }
+,
+  {
+    "name": "2026-08-13_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-08-13_karaoke_at_vals.yaml",
+    "type": "repeating"
+  }
 
 ]
