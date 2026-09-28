@@ -280,5 +280,17 @@
     "path": "content/events/repeating_generated/2026-10-18_crafty_sundays_at_vals.yaml",
     "type": "repeating"
   }
+,
+  {
+    "name": "2026-10-22_karaoke_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-10-22_karaoke_at_vals.yaml",
+    "type": "repeating"
+  }
+,
+  {
+    "name": "2026-10-25_crafty_sundays_at_vals.yaml",
+    "path": "content/events/repeating_generated/2026-10-25_crafty_sundays_at_vals.yaml",
+    "type": "repeating"
+  }
 
 ]
